@@ -25,3 +25,43 @@ features:
   - title: Localizable
     details: Month names, weekday names, date format — everything overridable via locale prop.
 ---
+
+<script setup>
+function generateData() {
+  const result = {}
+  const today = new Date()
+  for (let i = 364; i >= 0; i--) {
+    const d = new Date(today)
+    d.setDate(d.getDate() - i)
+    if (Math.random() > 0.35)
+      result[d.toISOString().slice(0, 10)] = Math.ceil(Math.random() * 10)
+  }
+  return result
+}
+const data = generateData()
+</script>
+
+<div class="home-demo">
+  <div class="home-demo__label">Live preview</div>
+  <CalendarHeatmap :data="data" range="year" />
+</div>
+
+<style>
+.home-demo {
+  max-width: 900px;
+  margin: 0 auto 64px;
+  padding: 32px 24px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background: var(--vp-c-bg-soft);
+  overflow-x: auto;
+}
+.home-demo__label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--vp-c-text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+</style>
