@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import type { WeekColumn, HeatmapDay } from '../types/data'
 import type { Orientation } from '../types/theme'
+import type { TodayOptions } from '../types/today'
 import HeatmapCell from './HeatmapCell.vue'
 
 interface Props {
@@ -9,6 +10,8 @@ interface Props {
   getCellStyle: (value: number, level: number) => Record<string, string>
   getCellClass: (level: number) => string
   orientation:  Orientation
+  todayDate:    string | null
+  todayOptions: TodayOptions | null
 }
 
 const props = defineProps<Props>()
@@ -36,6 +39,8 @@ const emit = defineEmits<{
           :day="day"
           :cell-style="props.getCellStyle(day.value, day.level)"
           :cell-class="props.getCellClass(day.level)"
+          :is-today="props.todayDate !== null && day.date === props.todayDate"
+          :today-options="props.todayOptions"
           @click="(d, e) => emit('cell-click', d, e)"
           @mouseenter="(d, e) => emit('cell-mouseenter', d, e)"
           @mouseleave="(d, e) => emit('cell-mouseleave', d, e)"

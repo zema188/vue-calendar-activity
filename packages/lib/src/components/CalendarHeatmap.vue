@@ -2,12 +2,13 @@
 import { computed, ref, onMounted, onBeforeUnmount } from "vue";
 import type { CalendarHeatmapProps } from "../types/props";
 import type { HeatmapDay } from "../types/data";
+import type { TodayOptions } from "../types/today";
 import { useCalendar } from "../composables/useCalendar";
 import { useColorScale } from "../composables/useColorScale";
 import { useLocale } from "../composables/useLocale";
 import { useTooltip } from "../composables/useTooltip";
 import { normalizeData, computeMaxValue } from "../utils/data";
-import { resolveRange, parsePx, formatDateString } from "../utils/date";
+import { resolveRange, parsePx, formatDateString, toDateString } from "../utils/date";
 import HeatmapGrid from "./HeatmapGrid.vue";
 import MonthLabels from "./MonthLabels.vue";
 import WeekdayLabels from "./WeekdayLabels.vue";
@@ -42,6 +43,7 @@ const props = withDefaults(defineProps<CalendarHeatmapProps>(), {
   dateFormat: "YYYY-MM-DD",
   emptyColor: undefined,
   stickyWeekdays: true,
+  today: false,
 });
 
 const emit = defineEmits<{
@@ -133,6 +135,18 @@ function handleMouseleave(day: HeatmapDay, event: MouseEvent): void {
 function handleClick(day: HeatmapDay, event: MouseEvent): void {
   emit("cell-click", day, event);
 }
+
+// ─── today highlight ──────────────────────────────────────────────────────
+
+const todayDateStr = toDateString(new Date())
+
+const resolvedToday = computed((): TodayOptions | false => {
+  const t = props.today
+  if (!t) return false
+  const defaults: TodayOptions = { color: isDark.value ? '#58a6ff' : '#0969da', style: 'ring', size: 2 }
+  if (t === true) return defaults
+  return { ...defaults, ...t }
+})
 
 // ─── weekday labels ────────────────────────────────────────────────────────
 
@@ -237,6 +251,8 @@ onBeforeUnmount(() => {
           :get-cell-style="getCellStyle"
           :get-cell-class="getCellClass"
           :orientation="props.orientation"
+          :today-date="resolvedToday ? todayDateStr : null"
+          :today-options="resolvedToday || null"
           @cell-click="handleClick"
           @cell-mouseenter="handleMouseenter"
           @cell-mouseleave="handleMouseleave"

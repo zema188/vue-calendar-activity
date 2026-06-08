@@ -3,3 +3,4 @@ export type { ScaleMode, ThemeMode, WeekStart, DateRange, ColorPreset, Orientati
 export type { HeatmapLocale, ResolvedLocale, LangCode, LocaleProp } from './locale'
 export type { CalendarHeatmapProps } from './props'
 export type { CalendarHeatmapEmits } from './emits'
+export type { TodayStyle, TodayOptions, TodayProp } from './today'

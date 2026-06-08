@@ -268,6 +268,21 @@
   background-color: transparent;
 }
 
+/* ─── today highlight ────────────────────────────────────────────────────── */
+
+.ch-cell--today {
+  --ch-today-color: #0969da;
+  --ch-today-size:  2px;
+}
+
+.ch-cell--today-ring {
+  box-shadow: inset 0 0 0 var(--ch-today-size) var(--ch-today-color);
+}
+
+.ch-cell--today-fill {
+  background-color: var(--ch-today-color) !important;
+}
+
 /* ─── tooltip ────────────────────────────────────────────────────────────── */
 /*
  * Tooltip is teleported to <body> via <Teleport>, so it lives outside

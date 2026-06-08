@@ -1,6 +1,7 @@
 import type { HeatmapData, HeatmapDay } from './data'
 import type { ScaleMode, ThemeMode, WeekStart, DateRange, ColorPreset, Orientation } from './theme'
 import type { LocaleProp } from './locale'
+import type { TodayProp } from './today'
 
 export interface CalendarHeatmapProps {
   data?:             HeatmapData
@@ -30,4 +31,5 @@ export interface CalendarHeatmapProps {
   dateFormat?:       string | ((date: string) => string)
   emptyColor?:       string
   stickyWeekdays?:   boolean
+  today?:            TodayProp
 }
