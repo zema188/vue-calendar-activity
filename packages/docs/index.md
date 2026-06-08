@@ -41,20 +41,26 @@ function generateData() {
 const data = generateData()
 </script>
 
-<div class="home-demo">
-  <div class="home-demo__label">Live preview</div>
-  <CalendarHeatmap :data="data" range="year" />
+<div class="home-demo-wrap">
+  <div class="home-demo">
+    <div class="home-demo__label">Live preview</div>
+    <div class="home-demo__scroll">
+      <CalendarHeatmap :data="data" range="year" />
+    </div>
+  </div>
 </div>
 
 <style>
+.home-demo-wrap {
+  padding: 0 24px 64px;
+}
 .home-demo {
   max-width: 900px;
-  margin: 0 auto 64px;
-  padding: 32px 24px;
+  margin: 0 auto;
+  padding: 24px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 12px;
   background: var(--vp-c-bg-soft);
-  overflow-x: auto;
 }
 .home-demo__label {
   font-size: 12px;
@@ -63,5 +69,9 @@ const data = generateData()
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 16px;
+}
+.home-demo__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 </style>
