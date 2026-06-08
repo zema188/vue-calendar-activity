@@ -1,0 +1,319 @@
+/* ─── root / light theme ─────────────────────────────────────────────────── */
+.calendar-heatmap {
+  --ch-cell-size:   12px;
+  --ch-cell-gap:    3px;
+  --ch-cell-radius: 2px;
+  --ch-font-size:   11px;
+  --ch-font-color:  #57606a;
+
+  --ch-color-level-0: #ebedf0;
+  --ch-color-level-1: #9be9a8;
+  --ch-color-level-2: #40c463;
+  --ch-color-level-3: #30a14e;
+  --ch-color-level-4: #216e39;
+  --ch-color-level-5: #1a5e30;
+  --ch-color-level-6: #14492a;
+  --ch-color-level-7: #0e3620;
+  --ch-color-level-8: #082416;
+  --ch-color-level-9: #04120b;
+
+  --ch-color-gradient-from: #9be9a8;
+  --ch-color-gradient-to:   #216e39;
+
+  --ch-tooltip-bg:      #1b1f24;
+  --ch-tooltip-color:   #ffffff;
+  --ch-tooltip-radius:  6px;
+  --ch-tooltip-padding: 6px 10px;
+  --ch-tooltip-font-size: 12px;
+
+  /* Surface color used by sticky elements to cover scrolled content behind them.
+     Set this to match your page/card background. */
+  --ch-bg: #ffffff;
+
+  display: inline-flex;
+  vertical-align: top;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--ch-font-size);
+  color: var(--ch-font-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  user-select: none;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* ─── dark theme ─────────────────────────────────────────────────────────── */
+.calendar-heatmap[data-theme="dark"] {
+  --ch-bg: #0d1117;
+  --ch-color-level-0: #161b22;
+  --ch-color-level-1: #0e4429;
+  --ch-color-level-2: #006d32;
+  --ch-color-level-3: #26a641;
+  --ch-color-level-4: #39d353;
+  --ch-font-color: #8b949e;
+}
+
+@media (prefers-color-scheme: dark) {
+  .calendar-heatmap[data-theme="auto"] {
+    --ch-bg: #0d1117;
+    --ch-color-level-0: #161b22;
+    --ch-color-level-1: #0e4429;
+    --ch-color-level-2: #006d32;
+    --ch-color-level-3: #26a641;
+    --ch-color-level-4: #39d353;
+    --ch-font-color: #8b949e;
+  }
+}
+
+/* ─── month labels ───────────────────────────────────────────────────────── */
+.ch-month-labels {
+  display: flex;
+  flex-direction: row;
+  padding-left: 0;
+}
+
+.ch-month-slot {
+  flex-shrink: 0;
+  height: 18px;
+  position: relative;
+}
+
+.ch-month-label {
+  font-size: var(--ch-font-size);
+  color: var(--ch-font-color);
+  white-space: nowrap;
+}
+
+/* vertical: months form a column on the left axis */
+.ch-month-labels--vertical {
+  flex-direction: column;
+}
+
+.ch-month-labels--vertical .ch-month-slot {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 4px;
+}
+
+/* ─── scroll wrapper ─────────────────────────────────────────────────────── */
+/*
+ * overflow-x: auto lives here (not on .calendar-heatmap) so that
+ * position: sticky on child elements works correctly:
+ *   - sticky left  → contained within .ch-scroll (horizontal)
+ *   - sticky top/bottom → travel up to the page scroll context
+ */
+.ch-scroll {
+  overflow-x: auto;
+  overflow-y: clip;
+  max-width: 100%;
+}
+
+/* ─── sticky weekdays (horizontal scroll) ────────────────────────────────── */
+/*
+ * .ch-sticky-left applied to both .ch-corner and .ch-weekday-labels
+ * so they move together as a unit when the grid is scrolled right.
+ * --ch-bg must match your page/card background for correct masking.
+ */
+.ch-sticky-left {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+
+.ch-scrolled .ch-sticky-left {
+  background-color: var(--ch-bg);
+}
+
+/* ─── body: CSS Grid aligns month labels, weekday labels, and grid ───────── */
+/*
+ * Default layout (showWeekdays + showMonths both true):
+ *   [ corner  | months  ]
+ *   [ weekdays | grid   ]
+ */
+.ch-body {
+  display: grid;
+  grid-template-areas:
+    "corner  months"
+    "weekdays grid";
+  grid-template-columns: auto auto;
+  column-gap: 6px;
+  row-gap: 4px;
+  align-items: start;
+}
+
+.ch-body--no-months {
+  grid-template-areas: "weekdays grid";
+  grid-template-rows: auto;
+}
+
+.ch-body--no-weekdays {
+  grid-template-areas:
+    "months"
+    "grid";
+  grid-template-columns: auto;
+}
+
+.ch-body--no-weekdays.ch-body--no-months {
+  grid-template-areas: "grid";
+  grid-template-columns: auto;
+}
+
+/*
+ * Vertical layout — axes swap:
+ *   weekday labels → top axis (horizontal row)
+ *   month labels   → left axis (vertical column)
+ *   [ corner   | weekdays ]
+ *   [ months   | grid     ]
+ */
+.ch-body--vertical {
+  grid-template-areas:
+    "corner  weekdays"
+    "months  grid";
+  grid-template-columns: auto auto;
+}
+
+.ch-body--vertical.ch-body--no-months {
+  grid-template-areas:
+    "weekdays"
+    "grid";
+  grid-template-columns: auto;
+}
+
+.ch-body--vertical.ch-body--no-weekdays {
+  grid-template-areas: "months grid";
+  grid-template-columns: auto auto;
+}
+
+.ch-body--vertical.ch-body--no-weekdays.ch-body--no-months {
+  grid-template-areas: "grid";
+  grid-template-columns: auto;
+}
+
+.ch-corner         { grid-area: corner; }
+.ch-month-labels   { grid-area: months; }
+.ch-weekday-labels { grid-area: weekdays; }
+.ch-grid           { grid-area: grid; }
+
+/* ─── weekday labels ─────────────────────────────────────────────────────── */
+.ch-weekday-labels {
+  display: flex;
+  flex-direction: column;
+}
+
+.ch-weekday-label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: var(--ch-font-size);
+  color: var(--ch-font-color);
+  white-space: nowrap;
+  padding-right: 4px;
+}
+
+/* vertical: weekday labels form a row on the top axis */
+.ch-weekday-labels--row {
+  flex-direction: row;
+}
+
+.ch-weekday-labels--row .ch-weekday-label {
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 0;
+  padding-bottom: 4px;
+  writing-mode: vertical-lr;
+}
+
+/* ─── grid ───────────────────────────────────────────────────────────────── */
+.ch-grid {
+  display: flex;
+  flex-direction: row;
+  gap: var(--ch-cell-gap);
+}
+
+.ch-week {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ch-cell-gap);
+}
+
+/* vertical: weeks stack top→bottom, days run left→right within each week */
+.ch-grid--vertical {
+  flex-direction: column;
+}
+
+.ch-grid--vertical .ch-week {
+  flex-direction: row;
+}
+
+/* ─── cell ───────────────────────────────────────────────────────────────── */
+.ch-cell {
+  width: var(--ch-cell-size);
+  height: var(--ch-cell-size);
+  border-radius: var(--ch-cell-radius);
+  background-color: var(--ch-color-level-0);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: opacity 0.12s ease;
+  outline: none;
+}
+
+.ch-cell:hover {
+  opacity: 0.75;
+}
+
+.ch-cell--empty {
+  cursor: default;
+  background-color: transparent;
+}
+
+/* ─── tooltip ────────────────────────────────────────────────────────────── */
+/*
+ * Tooltip is teleported to <body> via <Teleport>, so it lives outside
+ * .calendar-heatmap and cannot inherit its CSS custom properties.
+ * Fallback values here ensure the tooltip always renders correctly.
+ * Override at :root level if you need global customization.
+ */
+.ch-tooltip {
+  position: fixed;
+  z-index: 9999;
+  background: var(--ch-tooltip-bg, #1b1f24);
+  color: var(--ch-tooltip-color, #ffffff);
+  border-radius: var(--ch-tooltip-radius, 6px);
+  padding: var(--ch-tooltip-padding, 6px 10px);
+  font-size: var(--ch-tooltip-font-size, 12px);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  line-height: 1.4;
+}
+
+/* ─── legend ─────────────────────────────────────────────────────────────── */
+.ch-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.ch-legend-label {
+  font-size: var(--ch-font-size);
+  color: var(--ch-font-color);
+  margin-right: 4px;
+}
+
+.ch-legend-cells {
+  display: flex;
+  flex-direction: row;
+  gap: var(--ch-cell-gap);
+}
+
+.ch-legend-cell {
+  cursor: default;
+}
+
+.ch-legend-cell:hover {
+  opacity: 1;
+}
