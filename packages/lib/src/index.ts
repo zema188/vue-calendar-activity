@@ -18,6 +18,8 @@ export type {
   CalendarHeatmapEmits,
   HeatmapLocale,
   ResolvedLocale,
+  LangCode,
+  LocaleProp,
   ScaleMode,
   ThemeMode,
   WeekStart,

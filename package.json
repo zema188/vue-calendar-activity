@@ -9,10 +9,16 @@
     "docs:preview": "pnpm --filter docs preview",
     "release": "pnpm lib:build && changeset publish",
     "changeset": "changeset",
-    "version-packages": "changeset version"
+    "version-packages": "changeset version",
+    "type-check": "pnpm -r --parallel type-check",
+    "prepare": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-push": "pnpm type-check"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.0",
+    "simple-git-hooks": "^2.13.1",
     "typescript": "^5.5.0"
   }
 }

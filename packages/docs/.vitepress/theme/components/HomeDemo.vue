@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { CalendarHeatmap } from 'vue-calendar-activity'
+import type { LocaleProp } from 'vue-calendar-activity'
 
-const props = defineProps<{ locale?: string }>()
+const props = defineProps<{ locale?: LocaleProp }>()
 
 function generateData() {
   const result: Record<string, number> = {}
