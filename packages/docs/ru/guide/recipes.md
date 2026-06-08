@@ -397,6 +397,45 @@ function formatter(day: HeatmapDay): string {
 
 ---
 
+## Подсветка сегодня
+
+### По умолчанию (ring)
+
+<div class="demo-preview">
+<CalendarHeatmap :data="data" range="month" locale="ru" today />
+</div>
+
+```vue
+<CalendarHeatmap :data="data" today />
+```
+
+### Оба стиля
+
+<div class="demo-preview demo-stack">
+<CalendarHeatmap :data="data" range="month" locale="ru" :today="{ style: 'ring', color: '#0969da', size: 2 }" />
+<CalendarHeatmap :data="data" range="month" locale="ru" :today="{ style: 'fill', color: '#0969da' }" />
+</div>
+
+```vue
+<!-- ring — рамка внутри ячейки -->
+<CalendarHeatmap :data="data" :today="{ style: 'ring', color: '#0969da', size: 2 }" />
+
+<!-- fill — перекрывает цвет активности -->
+<CalendarHeatmap :data="data" :today="{ style: 'fill', color: '#0969da' }" />
+```
+
+### Свой цвет
+
+<div class="demo-preview">
+<CalendarHeatmap :data="data" range="month" locale="ru" :today="{ style: 'ring', color: '#f97316', size: 2 }" />
+</div>
+
+```vue
+<CalendarHeatmap :data="data" :today="{ style: 'ring', color: '#f97316', size: 2 }" />
+```
+
+---
+
 ## Легенда
 
 ### С подписью

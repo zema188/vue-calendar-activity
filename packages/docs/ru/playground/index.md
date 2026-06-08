@@ -41,6 +41,18 @@ const showLegend     = ref(true)
 const tooltipEnabled = ref(true)
 const stickyWeekdays = ref(true)
 
+// ── подсветка сегодня ──────────────────────────────────
+const todayEnabled = ref(false)
+const todayStyle   = ref('ring')
+const todayColor   = ref('#0969da')
+const todaySize    = ref(2)
+
+const resolvedToday = computed(() =>
+  todayEnabled.value
+    ? { style: todayStyle.value, color: todayColor.value, size: todaySize.value }
+    : false
+)
+
 // ── цвета ──────────────────────────────────────────────
 const colorMode   = ref('preset')   // 'preset' | 'single' | 'gradient'
 const colorPreset = ref('github')
@@ -107,6 +119,7 @@ const palettePreview = computed(() => {
   :tooltip-enabled="tooltipEnabled"
   :sticky-weekdays="stickyWeekdays"
   :locale="lang"
+  :today="resolvedToday"
 />
 </div>
 <div class="pg-controls">
@@ -222,6 +235,30 @@ const palettePreview = computed(() => {
 />
 </div>
 </div>
+</div>
+<div class="pg-group">
+<div class="pg-group-title">Подсветка сегодня</div>
+<label class="pg-check">
+<input type="checkbox" v-model="todayEnabled" />
+<span>Подсветить сегодня</span>
+</label>
+<template v-if="todayEnabled">
+<label class="pg-field">
+<span>Стиль</span>
+<select v-model="todayStyle">
+<option value="ring">Ring — рамка</option>
+<option value="fill">Fill — заливка</option>
+</select>
+</label>
+<div class="pg-field">
+<span>Цвет</span>
+<ColorPicker v-model="todayColor" />
+</div>
+<label class="pg-field">
+<span>Размер — {{ todaySize }}px</span>
+<input type="range" v-model.number="todaySize" min="1" max="6" step="1" />
+</label>
+</template>
 </div>
 <div class="pg-group">
 <div class="pg-group-title">Подписи и опции</div>

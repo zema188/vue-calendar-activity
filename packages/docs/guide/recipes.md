@@ -397,6 +397,45 @@ function formatter(day: HeatmapDay): string {
 
 ---
 
+## Today Highlight
+
+### Default (ring)
+
+<div class="demo-preview">
+<CalendarHeatmap :data="data" range="month" today />
+</div>
+
+```vue
+<CalendarHeatmap :data="data" today />
+```
+
+### Both styles
+
+<div class="demo-preview demo-stack">
+<CalendarHeatmap :data="data" range="month" :today="{ style: 'ring', color: '#0969da', size: 2 }" />
+<CalendarHeatmap :data="data" range="month" :today="{ style: 'fill', color: '#0969da' }" />
+</div>
+
+```vue
+<!-- ring — inset border -->
+<CalendarHeatmap :data="data" :today="{ style: 'ring', color: '#0969da', size: 2 }" />
+
+<!-- fill — overrides heat color -->
+<CalendarHeatmap :data="data" :today="{ style: 'fill', color: '#0969da' }" />
+```
+
+### Custom color
+
+<div class="demo-preview">
+<CalendarHeatmap :data="data" range="month" :today="{ style: 'ring', color: '#f97316', size: 2 }" />
+</div>
+
+```vue
+<CalendarHeatmap :data="data" :today="{ style: 'ring', color: '#f97316', size: 2 }" />
+```
+
+---
+
 ## Legend
 
 ### Legend with label

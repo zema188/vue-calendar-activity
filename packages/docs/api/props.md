@@ -43,6 +43,27 @@
 | `legendLabel` | `string` | `''` | Text label shown next to the legend. |
 | `stickyWeekdays` | `boolean` | `true` | Keep weekday labels pinned during horizontal scroll. |
 
+## Today Highlight
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `today` | `boolean \| TodayOptions` | `false` | Highlight today's cell. `true` uses defaults (ring, blue, 2px). |
+
+### `TodayOptions` shape
+
+```ts
+interface TodayOptions {
+  color?: string                          // highlight color (default: '#0969da' / '#58a6ff' in dark)
+  style?: 'ring' | 'fill'  // visual style (default: 'ring')
+  size?:  number           // thickness in px (default: 2)
+}
+```
+
+| Style | Description |
+|---|---|
+| `ring` | Inset border around the cell |
+| `fill` | Fills the cell with `color`, overriding the heat color |
+
 ## Tooltip
 
 | Prop | Type | Default | Description |

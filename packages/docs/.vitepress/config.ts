@@ -118,5 +118,8 @@ export default defineConfig({
         'vue-calendar-activity': resolve(__dirname, '../../lib/src/index.ts'),
       },
     },
+    optimizeDeps: {
+      exclude: ['vue-calendar-activity'],
+    },
   },
 })

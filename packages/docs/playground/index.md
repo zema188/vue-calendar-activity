@@ -41,6 +41,18 @@ const showLegend     = ref(true)
 const tooltipEnabled = ref(true)
 const stickyWeekdays = ref(true)
 
+// ── today highlight ────────────────────────────────────
+const todayEnabled = ref(false)
+const todayStyle   = ref('ring')
+const todayColor   = ref('#0969da')
+const todaySize    = ref(2)
+
+const resolvedToday = computed(() =>
+  todayEnabled.value
+    ? { style: todayStyle.value, color: todayColor.value, size: todaySize.value }
+    : false
+)
+
 // ── color ──────────────────────────────────────────────
 const colorMode   = ref('preset')   // 'preset' | 'single' | 'gradient'
 const colorPreset = ref('github')
@@ -108,6 +120,7 @@ const palettePreview = computed(() => {
   :tooltip-enabled="tooltipEnabled"
   :sticky-weekdays="stickyWeekdays"
   :locale="lang"
+  :today="resolvedToday"
 />
 </div>
 <div class="pg-controls">
@@ -223,6 +236,30 @@ const palettePreview = computed(() => {
 />
 </div>
 </div>
+</div>
+<div class="pg-group">
+<div class="pg-group-title">Today Highlight</div>
+<label class="pg-check">
+<input type="checkbox" v-model="todayEnabled" />
+<span>Highlight today</span>
+</label>
+<template v-if="todayEnabled">
+<label class="pg-field">
+<span>Style</span>
+<select v-model="todayStyle">
+<option value="ring">Ring</option>
+<option value="fill">Fill</option>
+</select>
+</label>
+<div class="pg-field">
+<span>Color</span>
+<ColorPicker v-model="todayColor" />
+</div>
+<label class="pg-field">
+<span>Size — {{ todaySize }}px</span>
+<input type="range" v-model.number="todaySize" min="1" max="6" step="1" />
+</label>
+</template>
 </div>
 <div class="pg-group">
 <div class="pg-group-title">Labels &amp; Options</div>
