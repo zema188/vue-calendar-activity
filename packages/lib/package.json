@@ -17,9 +17,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zema188/vue-calendar-activity"
+    "url": "git+https://github.com/zema188/vue-calendar-activity.git"
   },
-  "homepage": "https://vue-calendar-activity.vercel.app",
+  "homepage": "https://zema188.github.io/vue-calendar-activity/",
   "type": "module",
   "main": "./dist/vue-calendar-activity.cjs.js",
   "module": "./dist/vue-calendar-activity.es.js",

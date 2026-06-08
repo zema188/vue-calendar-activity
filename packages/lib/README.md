@@ -5,7 +5,7 @@ Modern GitHub-style calendar heatmap for Vue 3.
 [![npm](https://img.shields.io/npm/v/vue-calendar-activity)](https://www.npmjs.com/package/vue-calendar-activity)
 [![license](https://img.shields.io/npm/l/vue-calendar-activity)](./LICENSE)
 
-**[Documentation](https://vue-calendar-activity.vercel.app)** · **[Playground](https://vue-calendar-activity.vercel.app/playground/)**
+**[Documentation](https://zema188.github.io/vue-calendar-activity)** · **[Playground](https://zema188.github.io/vue-calendar-activity/playground/)**
 
 ---
 
@@ -108,7 +108,7 @@ app.component('CalendarHeatmap', CalendarHeatmap)
 | `cellSize` | `number` | `12` | Cell size in px |
 | `levels` | `number` | `5` | Number of color levels (2–10) |
 
-Full API: [vue-calendar-activity.vercel.app/api/props](https://vue-calendar-activity.vercel.app/api/props)
+Full API: [vue-calendar-activity.vercel.app/api/props](https://zema188.github.io/vue-calendar-activity/api/props)
 
 ## CSS variable overrides
 

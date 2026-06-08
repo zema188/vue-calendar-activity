@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import { resolve } from 'path'
 
 // ⚠️ Поменяй на реальный домен после деплоя (нужно для sitemap + hreflang).
-const hostname = process.env.DOCS_HOSTNAME ?? 'https://vue-calendar-activity.vercel.app'
+const hostname = process.env.DOCS_HOSTNAME ?? 'https://zema188.github.io/vue-calendar-activity'
 
 export default defineConfig({
   title: 'vue-calendar-activity',
