@@ -32,6 +32,7 @@ const data = generateData()
 <style scoped>
 .home-demo-wrap {
   padding: 0 24px 64px;
+  margin-top: 48px;
 }
 .home-demo {
   max-width: 900px;
