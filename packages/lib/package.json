@@ -1,6 +1,6 @@
 {
   "name": "vue-calendar-activity",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Modern GitHub-style calendar heatmap for Vue 3. Supports color presets, gradients, custom locales, vertical layout, dark theme and more.",
   "license": "MIT",
   "author": "Artem Zimin",
