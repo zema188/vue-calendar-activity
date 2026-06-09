@@ -8,7 +8,9 @@ GitHub-style calendar heatmap component for Vue 3.
 
 **[Documentation](https://zema188.github.io/vue-calendar-activity)** · **[Playground](https://zema188.github.io/vue-calendar-activity/playground/)**
 
-![vue-calendar-activity preview](https://zema188.github.io/vue-calendar-activity/screenshot.png)
+<p align="center">
+  <img src="https://zema188.github.io/vue-calendar-activity/screenshot.png" alt="vue-calendar-activity preview" />
+</p>
 
 ---
 
